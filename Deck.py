@@ -15,14 +15,15 @@ class Deck(list):
     using list as a base class.
     """
     
-    def __init__(self):
+    def __init__(self, type):
         """
         Initializes a deck of 52 standard playing cards in order using list base class.
         Arguments:
             self: the deck to be initialized
         """
         list.__init__(self) # initialize as an empty
-        self.extend([Card(i) for i in range(52)]) # add all of the cards in the deck
+        self.extend([type(i) for i in range(52)]) # add all of the cards in the deck
+        self._type = type
     
     def shuffle(self):
         """
@@ -65,23 +66,23 @@ class Deck(list):
             a: the list of Cards to be added to the Deck
         """
         for element in a:
-            if not isinstance(element, Card): # we check to see that a is a list of Cards
+            if not isinstance(element, self._type): # we check to see that a is a list of Cards
                 print("Only cards can be added to a deck")
                 return
         self.extend(a) # Simply extend the list of Cards!
-        
+"""        
 class PinochleDeck(Deck):
-    """
+    
     A Deck of Pinochle Cards, initialized with the Deck class
-    """
+    
     
     def __init__(self):
-        """
+        
         Initializes the Pinochle Deck with the Deck base class
         Arguments:
             self: the Deck to be initialized
-        """
-        Deck.__init__(self)
+        
+        Deck.__init__(self, Card)
         lowcards = [] # We have two lists of cards: those to be removed
         goodcards = []  # and those to be duplicated
         for card in self: # we go through the Deck to arrange these cards
@@ -94,3 +95,4 @@ class PinochleDeck(Deck):
         for card in goodcards: # and duplicate the rest
             self.append(card)
         self.sort() # and finally sort the deck
+"""        
